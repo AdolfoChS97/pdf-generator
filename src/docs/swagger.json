@@ -16,38 +16,105 @@
     },
     "host": "localhost:3000",
     "basePath": "/api/v1",
-    "paths": {
-        "/pdf/": {
-            "post": {
-                "tags": ["PDF"],
-                "summary": "Generates a PDF",
-                "description": "Generates a PDF given differents parameters",
-                "parameters": [
-                    {
-                        "name": "body",
-                        "in": "body",
-                        "description": "Parameters to generate a PDF",
-                        "required": true,
-                        "schema": {
-                            "type": "object",
-                            "properties": {
-                                "template": {
-                                    "type": "string",
-                                    "description": "Template to use to generate the PDF"
-                                },
-                                "data": {
-                                    "type": "object",
-                                    "description": "Data to use to generate the PDF",
-                                    "example": {
-                                        "key": "value"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                ]
-
+    "definitions": {
+      "PDF": {
+        "type": "object",
+        "properties": {
+          "template": {
+            "type": "string",
+            "description": "Template to use to generate the PDF"
+          },
+            "data": {
+                "type": "object",
+                "description": "Data to use to generate the PDF",
+                "example": {
+                "key": "value"
+                }
             }
         }
+      }
+    },
+    "paths": {
+      "/pdf/": {
+        "post": {
+          "tags": [
+            "PDF"
+          ],
+          "summary": "Generates a PDF",
+          "description": "Generates a PDF given differents parameters",
+          "parameters": [
+            {
+              "name": "body",
+              "in": "body",
+              "description": "Parameters to generate a PDF",
+              "required": true,
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "template": {
+                    "type": "string",
+                    "description": "Template to use to generate the PDF"
+                  },
+                  "data": {
+                    "type": "object",
+                    "description": "Data to use to generate the PDF",
+                    "example": {
+                      "key": "value"
+                    }
+                  }
+                }
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "PDF generated successfully",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "object",
+                    "description": "PDF generated in base64",
+                    "properties": {
+                      "document": {
+                        "type": "string",
+                        "description": "PDF generated in base64"
+                      }
+                    }
+                  },
+                  "message": {
+                    "type": "string",
+                    "description": "Message of the response"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Bad request",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "message": {
+                    "type": "string",
+                    "description": "Message of the response"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "message": {
+                    "type": "string",
+                    "description": "Message of the response"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
-}
+  }
