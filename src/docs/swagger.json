@@ -1,0 +1,53 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "title": "Generator PDF API Swagger Documentation",
+      "version": "1.0.0",
+      "description": "This microservice will be used for Generate different PDF's.",
+      "license": {
+        "name": "MIT",
+        "url": "https://spdx.org/licenses/MIT.html"
+      },
+      "contact": {
+        "name": "Adolfo Chafardett",
+        "url": "https://github.com/AdolfoChS97",
+        "email": "adolfo1997a@gmail.com"
+      }
+    },
+    "host": "localhost:3000",
+    "basePath": "/api/v1",
+    "paths": {
+        "/pdf/": {
+            "post": {
+                "tags": ["PDF"],
+                "summary": "Generates a PDF",
+                "description": "Generates a PDF given differents parameters",
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Parameters to generate a PDF",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "template": {
+                                    "type": "string",
+                                    "description": "Template to use to generate the PDF"
+                                },
+                                "data": {
+                                    "type": "object",
+                                    "description": "Data to use to generate the PDF",
+                                    "example": {
+                                        "key": "value"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                ]
+
+            }
+        }
+    }
+}
