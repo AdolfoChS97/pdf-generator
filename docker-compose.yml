@@ -1,0 +1,21 @@
+version: '3'
+services:
+  pdf-generator: 
+    build: 
+      # context: .
+      platforms:
+        - "linux/x86_64"
+      dockerfile: ".docker/Dockerfile"
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env
+    volumes:
+      - ./:/app
+      - /app/node_modules
+networks:
+  github:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 30.5.0.0/16
